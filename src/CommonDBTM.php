@@ -167,7 +167,7 @@ class CommonDBTM extends CommonGLPI
      *
      * @var boolean
      */
-    protected $usenotepad = false;
+    protected $usenotepad = true;
 
     /**
      * Flag to determine whether or not queued notifications should be deduplicated.

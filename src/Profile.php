@@ -934,6 +934,8 @@ class Profile extends CommonDBTM
                             $fn_get_rights(Consumable::class, 'central'),
                             $fn_get_rights(Phone::class, 'central'),
                             $fn_get_rights(Peripheral::class, 'central'),
+                            $fn_get_rights(Datacenter::class, 'central'),
+                            $fn_get_rights(Cable::class, 'central'),
                             $fn_get_rights(NetworkName::class, 'central', [
                                 'label' => __('Internet')
                             ]),
