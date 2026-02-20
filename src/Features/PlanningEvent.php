@@ -751,10 +751,14 @@ trait PlanningEvent
         $rrule = array_merge($defaults, $rrule);
 
         $default_options = [
-            'rand' => mt_rand(),
+            'rand'  => mt_rand(),
+            'begin' => '',
         ];
         $options = array_merge($default_options, $options);
-        $rand    = $options['rand'];
+        $rand  = $options['rand'];
+        $begin = is_string($options['begin']) && !empty($options['begin'])
+            ? substr($options['begin'], 0, 10)
+            : '';
 
         $out = "<div class='card' style='padding: 5px; width: 100%;'>";
         $out .= Dropdown::showFromArray('rrule[freq]', [
@@ -801,9 +805,29 @@ trait PlanningEvent
         $out .= "<div>" . Html::showDateField('rrule[until]', [
             'value'   => $rrule['until'],
             'rand'    => $rand,
+            'min'     => $begin,
             'display' => false,
         ]) . "</div>";
         $out .= "</div>";
+
+        $out .= Html::scriptBlock("
+            $(function() {
+                setTimeout(function() {
+                    var beginInput = document.querySelector('[name=\"plan[begin]\"]');
+                    var beginFp = beginInput ? beginInput.closest('.flatpickr') : null;
+                    var untilFp = document.getElementById('showdate{$rand}');
+                    if (beginFp && beginFp._flatpickr && untilFp && untilFp._flatpickr) {
+                        beginFp._flatpickr.config.onChange.push(function(selectedDates) {
+                            if (selectedDates.length > 0) {
+                                untilFp._flatpickr.set('minDate', selectedDates[0]);
+                            } else {
+                                untilFp._flatpickr.set('minDate', null);
+                            }
+                        });
+                    }
+                }, 200);
+            });
+        ");
 
         $out .= "<div class='field'>";
         $out .= "<label for='dropdown_byday$rand'>" . __("By day") . "</label>";
