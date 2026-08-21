@@ -10659,6 +10659,8 @@ CREATE TABLE `glpi_tags_itemtypes` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `unicity` (`itemtype`,`tags_id`),
   KEY `tags_id` (`tags_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
 ### Dump table glpi_tags_items
 
 DROP TABLE IF EXISTS `glpi_tags_items`;

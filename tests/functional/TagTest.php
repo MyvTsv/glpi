@@ -369,7 +369,7 @@ class TagTest extends DbTestCase
         ]);
         $this->assertFalse($result);
         $this->hasSessionMessages(ERROR, [htmlescape(sprintf(
-            'A tag with this name already exists in entity "%s"! Transfter the tag to another entity or change its name.',
+            'A tag with this name already exists in entity "%s"! Transfer the tag to another entity or change its name.',
             Dropdown::getDropdownName(Entity::getTable(), $root_entity_id)
         ))]);
 
@@ -392,7 +392,7 @@ class TagTest extends DbTestCase
         ]);
         $this->assertFalse($result);
         $this->hasSessionMessages(ERROR, [htmlescape(sprintf(
-            'A tag with this name already exists in entity "%s"! Transfter the tag to another entity or change its name.',
+            'A tag with this name already exists in entity "%s"! Transfer the tag to another entity or change its name.',
             Dropdown::getDropdownName(Entity::getTable(), $root_entity_id)
         ))]);
         $this->deleteItem(Tag::class, $duplicate_tag->getID());
@@ -411,7 +411,7 @@ class TagTest extends DbTestCase
             'entities_id' => $child_entity->getID(),
         ]));
         $this->hasSessionMessages(ERROR, [htmlescape(sprintf(
-            'A tag with this name already exists in entity "%s"! Transfter the tag to another entity or change its name.',
+            'A tag with this name already exists in entity "%s"! Transfer the tag to another entity or change its name.',
             Dropdown::getDropdownName(Entity::getTable(), $root_entity_id)
         ))]);
         $this->deleteItem(Tag::class, $recursive_tag->getID());
